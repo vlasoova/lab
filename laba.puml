@@ -1,0 +1,145 @@
+@startuml
+class world.Time {
+- int date
++ void go()
+}
+class world.Car {
+- ArrayList<Human> humansInCar
+- int x
++ void addHuman(Human)
++ void removeHuman(Human)
++ void move(int,int)
++ void drive(Human,Place,Place)
+}
+class world.Car$Door {
++ void setDoorStatus(Status)
+}
+class world.Car$Windows {
+- Status status
++ void setWindowStatus(Status)
+}
+class creatures.humans.Louis {
++ void eat(Food)
++ void open(Box)
++ void throwAway(Thing)
+}
+class creatures.humans.Louis$Brain {
+~ ArrayList<String> Thoughts
++ void think(String)
+}
+class creatures.humans.Louis$Hands {
+~ {static} ArrayList<Thing> hands
++ void receive(Box)
++ void receive(Food)
+}
+class Main {
++ {static} void main(String[])
+}
+interface interfaces.Resurrect {
+~ void resurrect(Human)
+~ void resurrect(Cat)
+}
+class creatures.Cat {
+- String name
+- double health
+- int x
++ String getName()
++ double getHealth()
++ void setHealth(double)
++ void die()
++ void move(int,int)
++ void arrive(Place)
+}
+enum creatures.humans.Feeling {
++  HORROR
++  IRRITATION
+- String feeling
+}
+abstract class world.Thing {
+- String name
+- int amount
++ int getAmount()
++ String toString()
+}
+class exceptions.AlreadyDeadException {
+}
+class creatures.humans.Human {
+- String name
+- double health
+~ double saturation
+- int x
++ String getName()
++ double getHealth()
++ int getX()
++ int getY()
++ void setHealth(double)
++ void setSaturation(double)
++ void die()
++ void resurrect(Human)
++ void resurrect(Cat)
++ void move(int,int)
++ void arrive(Place)
++ void carry(Human,Place)
++ void carry(Cat,Place)
++ void look(Human)
++ void open(Car.Windows)
++ void close(Car.Windows)
++ void open(Car.Door)
++ void close(Car.Door)
++ void bury(Human)
++ void bury(Cat)
+}
+class world.Food {
+}
+interface interfaces.Die {
+~ void die()
+}
+enum world.Status {
++  OPEN
++  CLOSED
+- String description
++ String toString()
+}
+class exceptions.AlreadyAliveException {
+}
+class exceptions.CannotBeBuriedException {
++ boolean isAlive
+}
+class world.Place {
+- String placeName
+- int corner_1_x
+- int corner_1_y
+- int corner_2_x
+- int corner_2_y
++ int getCorner_1_x()
++ int getCorner_1_y()
++ int getCorner_2_x()
++ int getCorner_2_y()
++ String getPlaceName()
++ String toString()
+}
+interface interfaces.Bury {
+~ void bury(Human)
+~ void bury(Cat)
+}
+class world.Box {
+- Status status
++ void setStatus(Status)
+}
+
+
+world.Car +.. world.Car$Door
+world.Car +.. world.Car$Windows
+creatures.humans.Human <|-- creatures.humans.Louis
+creatures.humans.Louis +.. creatures.humans.Louis$Brain
+creatures.humans.Louis +.. creatures.humans.Louis$Hands
+interfaces.Die <|.. creatures.Cat
+exceptions.RuntimeException <|-- exceptions.AlreadyDeadException
+interfaces.Die <|.. creatures.humans.Human
+interfaces.Resurrect <|.. creatures.humans.Human
+interfaces.Bury <|.. creatures.humans.Human
+world.Thing <|-- world.Food
+exceptions.RuntimeException <|-- exceptions.AlreadyAliveException
+exceptions.RuntimeException <|-- exceptions.CannotBeBuriedException
+world.Thing <|-- world.Box
+@enduml
