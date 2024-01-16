@@ -1,6 +1,5 @@
 package creatures;
 
-import creatures.humans.Human;
 import exceptions.CannotBeBuriedException;
 
 public class BuriedCat extends Cat{

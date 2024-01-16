@@ -1,5 +1,6 @@
 package creatures.humans;
 
+import creatures.BuriedCat;
 import creatures.Cat;
 import exceptions.AlreadyAliveException;
 import exceptions.AlreadyDeadException;
@@ -137,7 +138,7 @@ public class Human implements Die, Resurrect, Bury {
     public BuriedHuman bury(Human h) throws CannotBeBuriedException {
         return new BuriedHuman(h);
     }
-    public void bury(Cat c) throws CannotBeBuriedException {
-
+    public BuriedCat bury(Cat c) throws CannotBeBuriedException {
+        return new BuriedCat(c);
     }
 }
