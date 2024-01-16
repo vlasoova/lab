@@ -37,9 +37,11 @@ public class Human implements Die, Resurrect, Bury {
     public double getHealth() {
         return health;
     }
-    public double getSaturation() throws LostSaturationException {
-        if(saturation < 0){
-            System.out.println("Run out of saturation.");
+    public double getSaturation() {
+        try {
+            if(saturation < 0) throw new LostSaturationException("Run out of saturation");
+        } catch (LostSaturationException ex) {
+            System.out.println(ex.getMessage());
         }
         return saturation;
     }

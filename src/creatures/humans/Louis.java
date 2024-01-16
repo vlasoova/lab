@@ -1,7 +1,6 @@
 package creatures.humans;
 
 import world.*;
-
 import java.util.ArrayList;
 
 public class Louis extends Human {
