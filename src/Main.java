@@ -1,0 +1,125 @@
+import creatures.Cat;
+import creatures.humans.*;
+import world.*;
+
+
+
+public class Main {
+    public static void main(String[] args){
+        Time day = new Time(19);
+        Louis louis = new Louis("Louis",100, 0, 0, 100);
+        Louis.Brain louisBrain = louis.new Brain();
+        Louis.Hands louisHands = louis.new Hands();
+        Human pizzaman = new Human("Bob", 100, 3, 3, 100);
+        Human gadge = new Human("Gadge", 100, 0, 0, 100);
+        Human bill = new Human("Bill Butterman", 100, 1, 1, 100);
+        Human timmy = new Human("Timmy Butterman", 100, 0, 0, 100);
+        Human margory = new Human("Margory Washburn", 100, 7,1, 100);
+        Human rachel = new Human("Rachel", 100, 7, 3, 100);
+        //Policeman
+        Cat cherch = new Cat("Cherch", 100,7,3);
+        Box box = new Box("box for pizza", 1, Status.CLOSED);
+        Food pizza = new Food("Margarita", 1);
+
+        Place graveyard = new Place("Old Indian graveyard", 0, 2, 2, 4);
+        Place gadgeGrave = new Place("Gadge grave", 1, 4, 1, 4);
+        Place pizzeria = new Place("Pizzeria", 2, 2, 4, 4);
+        Place bangorStreet = new Place("street in Bangor", 0, 0, 4, 2);
+        Place ludlowStreet = new Place("street in Ludlow", 6, 0, 8, 2);
+        Place roadBangorLudlow = new Place("road from Ludlow to Bangor", 4, 0, 6, 4);
+        Place home = new Place("home", 6, 2, 8, 4);
+        Place roadToChicago = new Place("road to Chicago", 8, 0, 10, 4);
+        Place chicagoStreet = new Place("Chicago", 10, 0, 14, 4);
+
+        Car rachelCar = new Car(7, 1);
+        Car.Door rachelCarDoor = rachelCar.new Door();
+        Car louisCar = new Car(2, 1);
+        Car.Windows louisCarWindows = louisCar.new Windows();
+        Car.Door louisCarDoor = louisCar.new Door();
+
+        day.go(); //19
+        timmy.die();
+
+        day.go(); //20
+        day.go(); //21
+
+        day.go(); //22
+        bill.arrive(graveyard);
+        bill.arrive(gadgeGrave);
+        bill.carry(timmy, graveyard);
+        bill.bury(timmy);
+        bill.arrive(bangorStreet);
+
+        day.go(); //23
+        rachelCar.addHuman(rachel);
+        rachelCar.drive(rachel, ludlowStreet, roadToChicago);
+        rachelCar.drive(rachel, roadToChicago, chicagoStreet);
+        rachelCar.removeHuman(rachel);
+        cherch.die();
+        louis.arrive(graveyard);
+        louis.carry(cherch, graveyard);
+        louis.bury(cherch);
+        louis.arrive(bangorStreet);
+        day.go(); //24
+        gadge.die();
+
+        day.go(); //25
+        bill.arrive(graveyard);
+        bill.resurrect(timmy);
+
+        day.go(); //26
+        timmy.arrive(ludlowStreet);
+        margory.arrive(ludlowStreet);
+        margory.look(timmy);
+
+        day.go(); //27
+        louis.arrive(graveyard);
+        louis.resurrect(cherch);
+
+        day.go(); //28
+        rachel.open(rachelCarDoor);
+        rachelCar.addHuman(rachel);
+        rachel.close(rachelCarDoor);
+        rachelCar.drive(rachel, chicagoStreet, ludlowStreet);
+        rachel.open(rachelCarDoor);
+        rachelCar.removeHuman(rachel);
+        rachel.close(rachelCarDoor);
+        rachel.arrive(home);
+
+        day.go(); //29
+        louis.open(louisCarDoor);
+        louisCar.addHuman(louis);
+        louis.close(louisCarDoor);
+        louisCar.drive(louis, ludlowStreet, roadBangorLudlow);
+        louisCar.drive(louis, roadBangorLudlow, bangorStreet);
+        louis.open(louisCarDoor);
+        louisCar.removeHuman(louis);
+        louis.close(louisCarDoor);
+        louis.arrive(graveyard);
+        /*
+        louis.look(grave);
+        louis.feel(Feeling.HORROR);
+        hands.draw(spiral);
+        hands.erase(spiral);
+
+        */
+        pizzaman.arrive(pizzeria);
+        louis.arrive(bangorStreet);
+        louis.arrive(pizzeria);
+        louisHands.receive(box);
+        louis.arrive(bangorStreet);
+        louis.open(louisCarDoor);
+        louisCar.addHuman(louis);
+        louis.close(louisCarDoor);
+        louis.open(box);
+        louisHands.receive(pizza);
+        louis.eat(pizza);
+        //louis.feel(Feeling.IRRITATION);
+        louis.open(louisCarWindows);
+        louis.throwAway(box);
+        louis.close(louisCarWindows);
+        louisCar.drive(louis, bangorStreet, roadBangorLudlow);
+        louisCar.drive(louis, roadBangorLudlow, ludlowStreet);
+        louisBrain.think("about time");
+    }
+}
