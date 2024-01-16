@@ -5,6 +5,7 @@ import creatures.Cat;
 import exceptions.AlreadyAliveException;
 import exceptions.AlreadyDeadException;
 import exceptions.CannotBeBuriedException;
+import exceptions.LostSaturationException;
 import interfaces.Bury;
 import interfaces.Die;
 import interfaces.Resurrect;
@@ -36,7 +37,10 @@ public class Human implements Die, Resurrect, Bury {
     public double getHealth() {
         return health;
     }
-    public double getSaturation() {
+    public double getSaturation() throws LostSaturationException {
+        if(saturation < 0){
+            System.out.println("Run out of saturation.");
+        }
         return saturation;
     }
     public int getX() {
