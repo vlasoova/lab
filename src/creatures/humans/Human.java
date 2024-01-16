@@ -15,8 +15,9 @@ import world.Status;
 public class Human implements Die, Resurrect, Bury {
     private final String name;
     private double health;
-    double saturation;
+    private double saturation;
     private int x, y;
+    private Feeling feeling;
 
 
     public Human(String name, double health, int x, int y, double saturation) {
@@ -25,6 +26,7 @@ public class Human implements Die, Resurrect, Bury {
         this.x = x;
         this.y = y;
         this.saturation = saturation;
+        feeling = Feeling.PEACE;
     }
 
     public String getName() {
@@ -33,11 +35,18 @@ public class Human implements Die, Resurrect, Bury {
     public double getHealth() {
         return health;
     }
+    public double getSaturation() {
+        return saturation;
+    }
     public int getX() {
         return x;
     }
     public int getY() {
         return y;
+    }
+
+    public Feeling getFeeling() {
+        return feeling;
     }
 
     public void setHealth(double health){
@@ -48,48 +57,43 @@ public class Human implements Die, Resurrect, Bury {
         this.saturation = saturation;
     }
 
+    public void setFeeling(Feeling feeling) {
+        this.feeling = feeling;
+    }
+
     @Override
     public void die() throws AlreadyDeadException {
-        if (getHealth() > 0) {
-            setHealth(0);
-            System.out.printf("%n%s now is dead.%n", name);
-        } else {
-            throw new AlreadyDeadException("Person is already dead.");
-        }
+        if (getHealth() == 0) throw new AlreadyDeadException(String.format("Person %s is already dead", name));
+        setHealth(0);
+        System.out.printf("%n%s now is dead.%n", name);
     }
     @Override
     public  void resurrect(Human h) throws AlreadyAliveException {
-        if (h.getHealth() == 0) {
-            h.setHealth(100);
-            System.out.printf("%n%s now is alive.%n", name);
-        } else {
-            throw new AlreadyAliveException("Person is already alive.");
-        }
+        if (h.getHealth() != 0) throw new AlreadyAliveException(String.format("Person %s is already alive", name));
+        h.setHealth(100);
+        System.out.printf("%n%s now is alive.%n", name);
     }
     @Override
     public void resurrect(Cat c) throws AlreadyAliveException{
-        if (c.getHealth() == 0) {
-            c.setHealth(100);
-            System.out.printf("%n%s now is alive", name);
-        } else {
-            throw new AlreadyAliveException("Cat is already alive.");
-        }
+        if (c.getHealth() != 0) throw new AlreadyAliveException(String.format("Person %s is already alive", name));
+        c.setHealth(100);
+        System.out.printf("%n%s now is alive.%n", name);
     }
-    public void move(int x_go_to, int y_go_to){
-        while (x != x_go_to || y != y_go_to) {
-            if (x != x_go_to) {
-                x += (x_go_to > x) ? 1 : -1;
+    public void move(int xGoTo, int yGoTo){
+        while (x != xGoTo || y != yGoTo) {
+            if (x != xGoTo) {
+                x += (xGoTo > x) ? 1 : -1;
             }
-            if (y != y_go_to) {
-                y += (y_go_to > y) ? 1 : -1;
+            if (y != yGoTo) {
+                y += (yGoTo > y) ? 1 : -1;
             }
         }
-
+        saturation -= 5;
     }
     public void arrive(Place place){
-        int x_move_to = place.getCorner_1_x() + Math.abs((place.getCorner_2_x() - place.getCorner_1_x())/2);
-        int y_move_to = place.getCorner_1_y() + Math.abs((place.getCorner_2_y() - place.getCorner_1_y())/2);
-        move(x_move_to, y_move_to);
+        int xMoveTo = place.getCorner1X() + Math.abs((place.getCorner2X() - place.getCorner1X())/2);
+        int yMoveTo = place.getCorner1Y() + Math.abs((place.getCorner2Y() - place.getCorner1Y())/2);
+        move(xMoveTo, yMoveTo);
         System.out.printf("%n%s arrived to %s.%n", name, place);
     }
     public void carry(Human h, Place place){
@@ -105,6 +109,13 @@ public class Human implements Die, Resurrect, Bury {
             System.out.printf("%n%s saw %s.", name, human.name);
         } else {
             System.out.printf("%n%s didn't seen %s.", name, human.name);
+        }
+    }
+    public void look(Place place) {
+        if (x > place.getCorner1X() & x < place.getCorner2X() & y > place.getCorner1Y() & y < place.getCorner2Y()){
+            System.out.printf("%n%s looked at %s.", name, place.getPlaceName());
+        } else {
+            System.out.printf("%n%s didn't look at %s.", name, place.getPlaceName());
         }
     }
     public void open(Car.Windows window){
@@ -123,20 +134,10 @@ public class Human implements Die, Resurrect, Bury {
         door.setDoorStatus(Status.CLOSED);
         System.out.printf("%n%s closed the door.", name);
     }
-    public void bury(Human h) throws CannotBeBuriedException {
-        try{
-            
-            System.out.printf("%n%s buried %s", name, h.getName());
-        } catch (CannotBeBuriedException e){
-            System.err.printf("%n%s cannot be buried.", h.name);
-        }
+    public BuriedHuman bury(Human h) throws CannotBeBuriedException {
+        return new BuriedHuman(h);
     }
     public void bury(Cat c) throws CannotBeBuriedException {
-        try {
-            //h.getHealth() != 0
-            System.out.printf("%n%s buried %s", name, c.getName());
-        } catch (CannotBeBuriedException e) {
-            System.err.printf("%s cannot be buried.", c.getName());
-        }
+
     }
 }

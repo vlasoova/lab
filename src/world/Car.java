@@ -48,8 +48,8 @@ public class Car {
     }
 
     public void drive(Human human, Place fromPlace, Place toPlace) {
-        int xMoveTo = toPlace.getCorner_1_x() + Math.abs((toPlace.getCorner_2_x() - toPlace.getCorner_1_x()) / 2);
-        int yMoveTo = toPlace.getCorner_1_y() + Math.abs((toPlace.getCorner_2_y() - toPlace.getCorner_1_y()) / 2);
+        int xMoveTo = toPlace.getCorner1X() + Math.abs((toPlace.getCorner2X() - toPlace.getCorner1X()) / 2);
+        int yMoveTo = toPlace.getCorner1Y() + Math.abs((toPlace.getCorner2Y() - toPlace.getCorner1Y()) / 2);
         human.move(xMoveTo, yMoveTo);
         move(xMoveTo, yMoveTo);
         System.out.printf("%n%s drove from %s to %s", human.getName(), fromPlace.getPlaceName(), toPlace.getPlaceName());

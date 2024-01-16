@@ -1,9 +1,10 @@
 package interfaces;
 
 import creatures.Cat;
+import creatures.humans.BuriedHuman;
 import creatures.humans.Human;
 
 public interface Bury {
-    void bury(Human h);
+    BuriedHuman bury(Human h);
     void bury(Cat c);
 }

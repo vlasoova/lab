@@ -2,32 +2,32 @@ package world;
 
 public class Place {
     private final String placeName;
-    private int corner_1_x;
-    private int corner_1_y;
-    private int corner_2_x;
-    private int corner_2_y;
+    private int corner1X;
+    private int corner1Y;
+    private int corner2X;
+    private int corner2Y;
     public Place(String placeName, int corner_1_x, int corner_1_y, int corner_2_x, int corner_2_y){
         this.placeName = placeName;
-        this.corner_1_x = corner_1_x;
-        this.corner_1_y = corner_1_y;
-        this.corner_2_x = corner_2_x;
-        this.corner_2_y = corner_2_y;
+        this.corner1X = corner1X;
+        this.corner1Y = corner1Y;
+        this.corner2X = corner2X;
+        this.corner2Y = corner2Y;
     }
 
-    public int getCorner_1_x() {
-        return corner_1_x;
+    public int getCorner1X() {
+        return corner1X;
     }
 
-    public int getCorner_1_y() {
-        return corner_1_y;
+    public int getCorner1Y() {
+        return corner1Y;
     }
 
-    public int getCorner_2_x() {
-        return corner_2_x;
+    public int getCorner2X() {
+        return corner2X;
     }
 
-    public int getCorner_2_y() {
-        return corner_2_y;
+    public int getCorner2Y() {
+        return corner2Y;
     }
     public String getPlaceName(){
         return placeName;

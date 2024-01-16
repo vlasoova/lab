@@ -8,15 +8,12 @@ public class Main {
     public static void main(String[] args){
         Time day = new Time(19);
         Louis louis = new Louis("Louis",100, 0, 0, 100);
-        Louis.Brain louisBrain = louis.new Brain();
-        Louis.Hands louisHands = louis.new Hands();
         Human pizzaman = new Human("Bob", 100, 3, 3, 100);
         Human gadge = new Human("Gadge", 100, 0, 0, 100);
         Human bill = new Human("Bill Butterman", 100, 1, 1, 100);
         Human timmy = new Human("Timmy Butterman", 100, 0, 0, 100);
         Human margory = new Human("Margory Washburn", 100, 7,1, 100);
         Human rachel = new Human("Rachel", 100, 7, 3, 100);
-        //Policeman
         Cat cherch = new Cat("Cherch", 100,7,3);
         Box box = new Box("box for pizza", 1, Status.CLOSED);
         Food pizza = new Food("Margarita", 1);
@@ -37,20 +34,20 @@ public class Main {
         Car.Windows louisCarWindows = louisCar.new Windows();
         Car.Door louisCarDoor = louisCar.new Door();
 
-        day.go(); //19
+        day.go();
         timmy.die();
 
-        day.go(); //20
-        day.go(); //21
+        day.go();
+        day.go();
 
-        day.go(); //22
+        day.go();
         bill.arrive(graveyard);
         bill.arrive(gadgeGrave);
         bill.carry(timmy, graveyard);
         bill.bury(timmy);
         bill.arrive(bangorStreet);
 
-        day.go(); //23
+        day.go();
         rachelCar.addHuman(rachel);
         rachelCar.drive(rachel, ludlowStreet, roadToChicago);
         rachelCar.drive(rachel, roadToChicago, chicagoStreet);
@@ -60,23 +57,24 @@ public class Main {
         louis.carry(cherch, graveyard);
         louis.bury(cherch);
         louis.arrive(bangorStreet);
-        day.go(); //24
+
+        day.go();
         gadge.die();
 
-        day.go(); //25
+        day.go();
         bill.arrive(graveyard);
         bill.resurrect(timmy);
 
-        day.go(); //26
+        day.go();
         timmy.arrive(ludlowStreet);
         margory.arrive(ludlowStreet);
         margory.look(timmy);
 
-        day.go(); //27
+        day.go();
         louis.arrive(graveyard);
         louis.resurrect(cherch);
 
-        day.go(); //28
+        day.go();
         rachel.open(rachelCarDoor);
         rachelCar.addHuman(rachel);
         rachel.close(rachelCarDoor);
@@ -86,7 +84,7 @@ public class Main {
         rachel.close(rachelCarDoor);
         rachel.arrive(home);
 
-        day.go(); //29
+        day.go();
         louis.open(louisCarDoor);
         louisCar.addHuman(louis);
         louis.close(louisCarDoor);
@@ -96,30 +94,27 @@ public class Main {
         louisCar.removeHuman(louis);
         louis.close(louisCarDoor);
         louis.arrive(graveyard);
-        /*
-        louis.look(grave);
-        louis.feel(Feeling.HORROR);
-        hands.draw(spiral);
-        hands.erase(spiral);
-
-        */
+        louis.look(graveyard);
+        louis.louisBrain.feel(Feeling.HORROR);
+        Drawing drawing = louis.louisHands.draw(Shape.SPIRAL);
+        drawing = louis.louisHands.erase(drawing);
         pizzaman.arrive(pizzeria);
         louis.arrive(bangorStreet);
         louis.arrive(pizzeria);
-        louisHands.receive(box);
+        louis.louisHands.receive(box);
         louis.arrive(bangorStreet);
         louis.open(louisCarDoor);
         louisCar.addHuman(louis);
         louis.close(louisCarDoor);
         louis.open(box);
-        louisHands.receive(pizza);
+        louis.louisHands.receive(pizza);
         louis.eat(pizza);
-        //louis.feel(Feeling.IRRITATION);
+        louis.louisBrain.feel(Feeling.IRRITATION);
         louis.open(louisCarWindows);
         louis.throwAway(box);
         louis.close(louisCarWindows);
         louisCar.drive(louis, bangorStreet, roadBangorLudlow);
         louisCar.drive(louis, roadBangorLudlow, ludlowStreet);
-        louisBrain.think("about time");
+        louis.louisBrain.think("about time");
     }
 }

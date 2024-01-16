@@ -21,7 +21,12 @@ public class Cat implements Die{
     public double getHealth() {
         return health;
     }
-
+    public int getX() {
+        return x;
+    }
+    public int getY() {
+        return y;
+    }
     public void setHealth(double health){
         this.health = health;
     }
@@ -30,23 +35,20 @@ public class Cat implements Die{
         setHealth(0);
         System.out.printf("%n%s now is dead.", name);
     }
-    public void move(int x_go_to, int y_go_to){
-        if (x<x_go_to && y<y_go_to){
-            while (x < x_go_to)
-                x++;
-            while (y < y_go_to)
-                y++;
-        } else {
-            while (x != x_go_to)
-                x--;
-            while (y != y_go_to)
-                y--;
+    public void move(int xGoTo, int yGoTo){
+        while (x != xGoTo || y != yGoTo) {
+            if (x != xGoTo) {
+                x += (xGoTo > x) ? 1 : -1;
+            }
+            if (y != yGoTo) {
+                y += (yGoTo > y) ? 1 : -1;
+            }
         }
     }
     public void arrive(Place place){
-        int x_move_to = place.getCorner_1_x() + Math.abs((place.getCorner_2_x() - place.getCorner_1_x())/2);
-        int y_move_to = place.getCorner_1_y() + Math.abs((place.getCorner_2_y() - place.getCorner_1_y())/2);
-        move(x_move_to, y_move_to);
+        int xMoveTo = place.getCorner1X() + Math.abs((place.getCorner2X() - place.getCorner1X())/2);
+        int yMoveTo = place.getCorner1Y() + Math.abs((place.getCorner2Y() - place.getCorner1Y())/2);
+        move(xMoveTo, yMoveTo);
         System.out.printf("%n%s arrived to %s%n", name, place);
     }
 }
