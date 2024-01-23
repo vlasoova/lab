@@ -2,11 +2,12 @@ package world;
 
 public class Place {
     private final String placeName;
-    private int corner1X;
-    private int corner1Y;
-    private int corner2X;
-    private int corner2Y;
-    public Place(String placeName, int corner_1_x, int corner_1_y, int corner_2_x, int corner_2_y){
+    private final int corner1X;
+    private final int corner1Y;
+    private final int corner2X;
+    private final int corner2Y;
+
+    public Place(String placeName, int corner1X, int corner1Y, int corner2X, int corner2Y) {
         this.placeName = placeName;
         this.corner1X = corner1X;
         this.corner1Y = corner1Y;
@@ -29,12 +30,13 @@ public class Place {
     public int getCorner2Y() {
         return corner2Y;
     }
-    public String getPlaceName(){
+
+    public String getPlaceName() {
         return placeName;
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return placeName;
     }
 }

@@ -1,29 +1,35 @@
 package world;
+
 import creatures.humans.Human;
+import interfaces.Moveable;
 
 import java.util.ArrayList;
 
-public class Car {
+public class Car implements Moveable {
     private final ArrayList<Human> humansInCar;
-    private int x, y;
+    private final int x, y;
 
     public Car(int x, int y) {
         humansInCar = new ArrayList<>();
         this.x = x;
         this.y = y;
     }
+
     public class Door {
-        public void setDoorStatus(Status status){
+        private Status status;
+
+        public void setDoorStatus(Status status) {
+            this.status = status;
         }
     }
 
     public class Windows {
         private Status status;
+
         public void setWindowStatus(Status status) {
             this.status = status;
         }
     }
-
 
 
     public void addHuman(Human h) {
@@ -37,14 +43,7 @@ public class Car {
     }
 
     public void move(int xGoTo, int yGoTo) {
-        while (x != xGoTo || y != yGoTo) {
-            if (x != xGoTo) {
-                x += (xGoTo > x) ? 1 : -1;
-            }
-            if (y != yGoTo) {
-                y += (yGoTo > y) ? 1 : -1;
-            }
-        }
+        changeCoordinates(this.x, this.y, xGoTo, yGoTo);
     }
 
     public void drive(Human human, Place fromPlace, Place toPlace) {

@@ -3,18 +3,17 @@ import creatures.humans.*;
 import world.*;
 
 
-
 public class Main {
-    public static void main(String[] args){
+    public static void main(String[] args) {
         Time day = new Time(19);
-        Louis louis = new Louis("Louis",100, 0, 0, 100);
-        Human pizzaman = new Human("Bob", 100, 3, 3, 100);
-        Human gadge = new Human("Gadge", 100, 0, 0, 100);
-        Human bill = new Human("Bill Butterman", 100, 1, 1, 100);
-        Human timmy = new Human("Timmy Butterman", 100, 0, 0, 100);
-        Human margory = new Human("Margory Washburn", 100, 7,1, 100);
-        Human rachel = new Human("Rachel", 100, 7, 3, 100);
-        Cat cherch = new Cat("Cherch", 100,7,3);
+        Louis louis = new Louis("Louis", 100, 0, 0);
+        Human pizzaman = new Human("Bob", 100, 3, 3);
+        Human gadge = new Human("Gadge", 100, 0, 0);
+        Human bill = new Human("Bill Butterman", 100, 1, 1);
+        Human timmy = new Human("Timmy Butterman", 100, 0, 0);
+        Human margory = new Human("Margory Washburn", 100, 7, 1);
+        Human rachel = new Human("Rachel", 100, 7, 3);
+        Cat cherch = new Cat("Cherch", 100, 7, 3);
         Box box = new Box("box for pizza", 1, Status.CLOSED);
         Food pizza = new Food("Margarita", 1);
 
@@ -95,26 +94,26 @@ public class Main {
         louis.close(louisCarDoor);
         louis.arrive(graveyard);
         louis.look(graveyard);
-        louis.louisBrain.feel(Feeling.HORROR);
-        Drawing drawing = louis.louisHands.draw(Shape.SPIRAL);
-        drawing = louis.louisHands.erase(drawing);
+        louis.getLouisBrain().feel(Feeling.HORROR);
+        Drawing drawing = louis.getLouisHands().draw(Shape.SPIRAL);
+        drawing = louis.getLouisHands().erase(drawing);
         pizzaman.arrive(pizzeria);
         louis.arrive(bangorStreet);
         louis.arrive(pizzeria);
-        louis.louisHands.receive(box);
+        louis.getLouisHands().receive(box);
         louis.arrive(bangorStreet);
         louis.open(louisCarDoor);
         louisCar.addHuman(louis);
         louis.close(louisCarDoor);
         louis.open(box);
-        louis.louisHands.receive(pizza);
+        louis.getLouisHands().receive(pizza);
         louis.eat(pizza);
-        louis.louisBrain.feel(Feeling.IRRITATION);
+        louis.getLouisBrain().feel(Feeling.IRRITATION);
         louis.open(louisCarWindows);
         louis.throwAway(box);
         louis.close(louisCarWindows);
         louisCar.drive(louis, bangorStreet, roadBangorLudlow);
         louisCar.drive(louis, roadBangorLudlow, ludlowStreet);
-        louis.louisBrain.think("about time");
+        louis.getLouisBrain().think("about time");
     }
 }
